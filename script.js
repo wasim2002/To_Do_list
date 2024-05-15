@@ -12,16 +12,6 @@ main.innerHTML = `
     </div>
 </div>
 <div class="lists">
-    <div class="list">
-        <input type="checkbox" id="checkbox">
-        <div class="todo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quaerat quasi
-        consequatur rerum nemo ut tempore necessitatibus esse sequi itaque culpa impedit, qui ratione
-        veritatis autem fuga debitis, repellat iusto.</div>
-        <div class="icons">
-            <i class="fa-solid fa-pen"></i>
-            <i class="fa-solid fa-trash-can"></i>
-        </div>
-    </div>
 </div>
 `;
 
@@ -44,12 +34,14 @@ function addTodo(e) {
     setCloudData(newTodo);
     getCloudData();
     updateList();
-}
+};
+
 function setCloudData(todo) {
     let getData = getCloudData();
     getData.push(todo);
     localStorage.setItem("todo", JSON.stringify(getData));
 };
+
 function updateList() {
     let allTodos = getCloudData()
     lists.innerHTML="";
@@ -63,17 +55,15 @@ function updateList() {
         </div>
         </div>`;
         lists.insertAdjacentHTML("afterbegin", list);
-    })
-}
-// function addTodo(e) {
-//     let list = `<div class="list">
-// <input type="checkbox" id="checkbox">
-// <div class="todo">${e}</div>
-// <div class="icons">
-//     <i class="fa-solid fa-pen"></i>
-//     <i class="fa-solid fa-trash-can"></i>
-// </div>
-// </div>`;
-//     lists.insertAdjacentHTML("afterbegin", list);
-// }
+        const todoBody = document.querySelector(".list");
+        const todoText = document.querySelector(".todo");
+        const todoCheckbox = document.querySelector("#checkbox");
+        const editTodo = document.querySelector(".fa-pen");
+        const deleteTodo = document.querySelector(".fa-trash-can");
+        todoBody.addEventListener("click",()=>{
+
+        })
+    });
+};
+
 
