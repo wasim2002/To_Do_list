@@ -59,14 +59,27 @@ function updateList() {
     lists.innerHTML = "";
 
     allTodos.forEach((todo) => {
-        let list = `<div class="list" id="${todo.id}">
-        <input type="checkbox" id="checkbox">
-        <div class="todo">${todo.todo}</div>
-        <div class="icons">
+
+        let list = ``;
+        if (todo.checked == true) {
+            list = `<div class="list done-bg" id="${todo.id}">
+            <input type="checkbox" id="checkbox" checked>
+            <div class="todo done">${todo.todo}</div>
+            <div class="icons">
             <i class="fa-solid fa-pen"></i>
             <i class="fa-solid fa-trash-can"></i>
-        </div>
-        </div>`;
+            </div>
+            </div>`;
+        } else {
+            list = `<div class="list" id="${todo.id}">
+            <input type="checkbox" id="checkbox">
+            <div class="todo">${todo.todo}</div>
+            <div class="icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash-can"></i>
+            </div>
+            </div>`;
+        }
 
         lists.insertAdjacentHTML("afterbegin", list);
 
@@ -81,11 +94,14 @@ function updateList() {
                 todoText.classList.remove("done");
                 todoBody.classList.remove("done-bg");
                 todoCheckbox.checked = false;
+                todo.checked = false;
             } else {
                 todoText.classList.add("done");
                 todoBody.classList.add("done-bg")
                 todoCheckbox.checked = true;
+                todo.checked = true;
             };
+            localStorage.setItem("todo", JSON.stringify(allTodos))
         }
 
         todoText.addEventListener("click", checkDoneClass);
@@ -98,6 +114,6 @@ function deleteTodo(id) {
     console.log(id);
     let allTodos = getCloudData();
     let target = allTodos.filter((todo) => todo.id !== id);
-    localStorage.setItem("todo",JSON.stringify(target));
+    localStorage.setItem("todo", JSON.stringify(target));
     updateList()
 }
