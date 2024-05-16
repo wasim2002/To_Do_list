@@ -59,8 +59,8 @@ function updateList() {
     lists.innerHTML = "";
 
     allTodos.forEach((todo) => {
-
         let list = ``;
+
         if (todo.checked == true) {
             list = `<div class="list done-bg" id="${todo.id}">
             <input type="checkbox" id="checkbox" checked>
@@ -107,13 +107,17 @@ function updateList() {
         todoText.addEventListener("click", checkDoneClass);
         todoCheckbox.addEventListener("change", checkDoneClass);
         deleteTodoBtn.addEventListener("click", () => deleteTodo(todo.id));
+        editTodoBtn.addEventListener("click", () => editTodo(todoText.textContent))
     });
 };
 
 function deleteTodo(id) {
-    console.log(id);
     let allTodos = getCloudData();
     let target = allTodos.filter((todo) => todo.id !== id);
     localStorage.setItem("todo", JSON.stringify(target));
-    updateList()
-}
+    updateList();
+};
+
+function editTodo(todo) {
+    input.value = todo
+};
