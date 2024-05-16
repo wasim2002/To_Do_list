@@ -1,7 +1,9 @@
-window.addEventListener("load",updateList);
+window.addEventListener("load", updateList);
+
 function getCloudData() {
     return JSON.parse(localStorage.getItem("todo")) || [];
 };
+
 const main = document.querySelector("main");
 
 main.innerHTML = `
@@ -19,8 +21,8 @@ const addBtn = document.querySelector(".addBtn");
 const lists = document.querySelector(".lists");
 const input = document.querySelector("#input");
 
-input.addEventListener("keypress",(e)=>{
-    if (e.key === "Enter"){
+input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
         if (input.value != "") {
             addTodo(input.value);
             input.value = "";
@@ -40,6 +42,7 @@ function addTodo(e) {
         id: new Date().getTime(),
         todo: e
     };
+
     setCloudData(newTodo);
     getCloudData();
     updateList();
@@ -52,8 +55,9 @@ function setCloudData(todo) {
 };
 
 function updateList() {
-    let allTodos = getCloudData()
-    lists.innerHTML="";
+    let allTodos = getCloudData();
+    lists.innerHTML = "";
+
     allTodos.forEach((todo) => {
         let list = `<div class="list" id="${todo.id}">
         <input type="checkbox" id="checkbox">
@@ -63,28 +67,37 @@ function updateList() {
             <i class="fa-solid fa-trash-can"></i>
         </div>
         </div>`;
+
         lists.insertAdjacentHTML("afterbegin", list);
+
         const todoBody = document.querySelector(".list");
         const todoText = document.querySelector(".todo");
         const todoCheckbox = document.querySelector("#checkbox");
-        const editTodo = document.querySelector(".fa-pen");
-        const deleteTodo = document.querySelector(".fa-trash-can");
+        const editTodoBtn = document.querySelector(".fa-pen");
+        const deleteTodoBtn = document.querySelector(".fa-trash-can");
 
-        function checkDoneClass(){
+        function checkDoneClass() {
             if (todoText.classList.contains("done")) {
                 todoText.classList.remove("done");
                 todoBody.classList.remove("done-bg");
-                todoCheckbox.checked=false;
-            }else{
+                todoCheckbox.checked = false;
+            } else {
                 todoText.classList.add("done");
                 todoBody.classList.add("done-bg")
-                todoCheckbox.checked=true;
+                todoCheckbox.checked = true;
             };
         }
-        todoText.addEventListener("click",checkDoneClass);
-        todoCheckbox.addEventListener("change",checkDoneClass)
 
+        todoText.addEventListener("click", checkDoneClass);
+        todoCheckbox.addEventListener("change", checkDoneClass);
+        deleteTodoBtn.addEventListener("click", () => deleteTodo(todo.id));
     });
 };
 
-
+function deleteTodo(id) {
+    console.log(id);
+    let allTodos = getCloudData();
+    let target = allTodos.filter((todo) => todo.id !== id);
+    localStorage.setItem("todo",JSON.stringify(target));
+    updateList()
+}
