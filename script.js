@@ -19,6 +19,15 @@ const addBtn = document.querySelector(".addBtn");
 const lists = document.querySelector(".lists");
 const input = document.querySelector("#input");
 
+input.addEventListener("keypress",(e)=>{
+    if (e.key === "Enter"){
+        if (input.value != "") {
+            addTodo(input.value);
+            input.value = "";
+        };
+    }
+});
+
 addBtn.addEventListener("click", () => {
     if (input.value != "") {
         addTodo(input.value);
@@ -61,7 +70,6 @@ function updateList() {
         const editTodo = document.querySelector(".fa-pen");
         const deleteTodo = document.querySelector(".fa-trash-can");
         todoBody.addEventListener("click",()=>{
-
         })
     });
 };
