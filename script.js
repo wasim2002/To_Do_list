@@ -69,8 +69,21 @@ function updateList() {
         const todoCheckbox = document.querySelector("#checkbox");
         const editTodo = document.querySelector(".fa-pen");
         const deleteTodo = document.querySelector(".fa-trash-can");
-        todoBody.addEventListener("click",()=>{
-        })
+
+        function checkDoneClass(){
+            if (todoText.classList.contains("done")) {
+                todoText.classList.remove("done");
+                todoBody.classList.remove("done-bg");
+                todoCheckbox.checked=false;
+            }else{
+                todoText.classList.add("done");
+                todoBody.classList.add("done-bg")
+                todoCheckbox.checked=true;
+            };
+        }
+        todoText.addEventListener("click",checkDoneClass);
+        todoCheckbox.addEventListener("change",checkDoneClass)
+
     });
 };
 
