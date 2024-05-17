@@ -107,7 +107,7 @@ function updateList() {
         todoText.addEventListener("click", checkDoneClass);
         todoCheckbox.addEventListener("change", checkDoneClass);
         deleteTodoBtn.addEventListener("click", () => deleteTodo(todo.id));
-        editTodoBtn.addEventListener("click", () => editTodo(todoText.textContent))
+        editTodoBtn.addEventListener("click", () => editTodo(todoText.textContent, todo.id))
     });
 };
 
@@ -118,6 +118,7 @@ function deleteTodo(id) {
     updateList();
 };
 
-function editTodo(todo) {
-    input.value = todo
+function editTodo(todoText, id) {
+    input.value = todoText;
+    deleteTodo(id)
 };
