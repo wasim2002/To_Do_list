@@ -20,6 +20,23 @@ main.innerHTML = `
 const addBtn = document.querySelector(".addBtn");
 const lists = document.querySelector(".lists");
 const input = document.querySelector("#input");
+const soundAccess = document.querySelector(".soundAccess");
+const addAudio = new Audio("sound/add.mp3");
+const checkedAudio = new Audio("sound/checked.mp3");
+const deleteAudio = new Audio("sound/delete.mp3");
+
+soundAccess.addEventListener("click", (e) => {
+    if (e.target.classList[1] == "fa-volume-high") {
+        soundAccess.innerHTML = `<i class="fa-solid fa-volume-xmark sa"></i>`
+    } else {
+        soundAccess.innerHTML = `<i class="fa-solid fa-volume-high sa"></i>`
+    }
+})
+// function addAudio(){
+//     if () {
+
+//     }
+// }
 
 input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
@@ -46,6 +63,7 @@ function addTodo(e) {
     setCloudData(newTodo);
     getCloudData();
     updateList();
+    addAudio.play();
 };
 
 function setCloudData(todo) {
@@ -102,6 +120,7 @@ function updateList() {
                 todo.checked = true;
             };
             localStorage.setItem("todo", JSON.stringify(allTodos))
+            checkedAudio.play();
         }
 
         todoText.addEventListener("click", checkDoneClass);
@@ -116,6 +135,7 @@ function deleteTodo(id) {
     let target = allTodos.filter((todo) => todo.id !== id);
     localStorage.setItem("todo", JSON.stringify(target));
     updateList();
+    deleteAudio.play();
 };
 
 function editTodo(todoText, id) {
