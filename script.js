@@ -25,18 +25,17 @@ const addAudio = new Audio("sound/add.mp3");
 const checkedAudio = new Audio("sound/checked.mp3");
 const deleteAudio = new Audio("sound/delete.mp3");
 
+let soundAccessFlag = true;
+
 soundAccess.addEventListener("click", (e) => {
     if (e.target.classList[1] == "fa-volume-high") {
-        soundAccess.innerHTML = `<i class="fa-solid fa-volume-xmark sa"></i>`
+        soundAccess.innerHTML = `<i class="fa-solid fa-volume-xmark sa"></i>`;
+        soundAccessFlag = false;
     } else {
-        soundAccess.innerHTML = `<i class="fa-solid fa-volume-high sa"></i>`
+        soundAccess.innerHTML = `<i class="fa-solid fa-volume-high sa"></i>`;
+        soundAccessFlag = true;
     }
 })
-// function addAudio(){
-//     if () {
-
-//     }
-// }
 
 input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
@@ -44,7 +43,7 @@ input.addEventListener("keypress", (e) => {
             addTodo(input.value);
             input.value = "";
         };
-    }
+    };
 });
 
 addBtn.addEventListener("click", () => {
@@ -63,7 +62,10 @@ function addTodo(e) {
     setCloudData(newTodo);
     getCloudData();
     updateList();
-    addAudio.play();
+
+    if (soundAccessFlag == true) {
+        addAudio.play();
+    }
 };
 
 function setCloudData(todo) {
@@ -115,18 +117,21 @@ function updateList() {
                 todo.checked = false;
             } else {
                 todoText.classList.add("done");
-                todoBody.classList.add("done-bg")
+                todoBody.classList.add("done-bg");
                 todoCheckbox.checked = true;
                 todo.checked = true;
             };
-            localStorage.setItem("todo", JSON.stringify(allTodos))
-            checkedAudio.play();
-        }
+            localStorage.setItem("todo", JSON.stringify(allTodos));
+
+            if (soundAccessFlag == true) {
+                checkedAudio.play();
+            };
+        };
 
         todoText.addEventListener("click", checkDoneClass);
         todoCheckbox.addEventListener("change", checkDoneClass);
         deleteTodoBtn.addEventListener("click", () => deleteTodo(todo.id));
-        editTodoBtn.addEventListener("click", () => editTodo(todoText.textContent, todo.id))
+        editTodoBtn.addEventListener("click", () => editTodo(todoText.textContent, todo.id));
     });
 };
 
@@ -135,7 +140,10 @@ function deleteTodo(id) {
     let target = allTodos.filter((todo) => todo.id !== id);
     localStorage.setItem("todo", JSON.stringify(target));
     updateList();
-    deleteAudio.play();
+    
+    if (soundAccessFlag == true) {
+        deleteAudio.play();
+    };
 };
 
 function editTodo(todoText, id) {
