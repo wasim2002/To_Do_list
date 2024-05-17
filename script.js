@@ -120,5 +120,5 @@ function deleteTodo(id) {
 
 function editTodo(todoText, id) {
     input.value = todoText;
-    deleteTodo(id)
+    deleteTodo(id);
 };
