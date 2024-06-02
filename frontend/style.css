@@ -33,7 +33,7 @@ main {
   border-radius: 5px;
   overflow: hidden;
 }
-#input {
+#input,#editInput {
   outline: none;
   border: none;
   font-size: 18px;
@@ -42,7 +42,8 @@ main {
   height: 100%;
 }
 
-.addBtn {
+.addBtn,
+.editBtn {
   font-size: 20px;
   padding: 8px 30px;
   border: none;
@@ -52,9 +53,11 @@ main {
   font-weight: 600;
   cursor: pointer;
 }
-.addBtn:active {
+.addBtn:active,
+.editBtn:active {
   scale: 0.95;
 }
+
 .lists {
   display: flex;
   flex-direction: column;
@@ -91,13 +94,13 @@ main {
 i {
   cursor: pointer;
 }
-.done{
+.done {
   text-decoration: line-through;
 }
-.done-bg{
+.done-bg {
   background-color: rgba(212, 211, 211, 0.793);
 }
-.soundAccess{
+.soundAccess {
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -106,8 +109,8 @@ i {
   position: absolute;
   top: 50px;
   right: 85px;
-} 
-.sa{
+}
+.sa {
   padding: 15px;
   font-size: 23px;
 }
