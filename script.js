@@ -1,8 +1,6 @@
 window.addEventListener("load", updateList);
 
-function getCloudData() {
-    return JSON.parse(localStorage.getItem("todo")) || [];
-};
+
 
 const main = document.querySelector("main");
 
